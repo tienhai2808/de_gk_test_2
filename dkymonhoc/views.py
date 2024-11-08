@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
+  for user in User.objects.filter(sinhvien__isnull=True):
+    print(user)
   return render(request, 'index.html')
 
 def ctmonhoc(request, idmonhoc):
@@ -35,7 +37,10 @@ def sinhvien(request, idsinhvien=None):
     if form.is_valid():
       sinh_vien_update = form.save(commit=False)
       if not idsinhvien:
-        tai_khoan_none = [user for user in User.objects.all() if not hasattr(user, 'sinhvien')]
+        tai_khoan_none = [user for user in User.objects.filter(sinhvien__isnull=True)]
+        if len(tai_khoan_none) == 0:
+          messages.warning(request, 'Tạo mới không thành công')
+          return redirect('/')
         sinh_vien_update.tai_khoan = tai_khoan_none[0]
       sinh_vien_update.save()
       form.save_m2m()
