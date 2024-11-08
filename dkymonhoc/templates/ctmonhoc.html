@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ monhoc.ten }}</title>
+</head>
+<body>
+  <h1>{{ monhoc.ten }}</h1>
+  Tên: {{ monhoc.ten }} <br>
+  Tín chỉ: {{ monhoc.tin_chi }} <br>
+  Học phí: {{ monhoc.hoc_phi }}K VNĐ <br>
+  Mô tả: {{ monhoc.mo_ta }} <br>
+  {% for sv in nhieusinhvien %}
+    Họ tên: <a href="/dssinhvien/{{ sv.sinh_vien.id }}/">{{ sv.sinh_vien.ho_ten }}</a> <br>
+    Giới tính: {{ sv.sinh_vien.gioi_tinh }} <br>
+  {% endfor %}
+</body>
+</html>
